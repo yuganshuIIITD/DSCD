@@ -3,7 +3,7 @@
 #   Connects REQ socket to tcp://localhost:5555
 #   Sends "Hello" to server, expects "World" back
 #
-
+# pyhton3 server.py
 import zmq
 
 context = zmq.Context()
@@ -15,9 +15,10 @@ socket.connect("tcp://localhost:5555")
 
 #  Do 10 requests, waiting each time for a response
 for request in range(10):
-    print(f"Sending request {request} …")
+    print(f"Sending request {request}")
     socket.send(b"Hello")
 
     #  Get the reply.
+
     message = socket.recv()
     print(f"Received reply {request} [ {message} ]")
