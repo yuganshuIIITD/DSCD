@@ -5,7 +5,7 @@
 #
 # pyhton3 server.py
 import zmq
-
+import json
 context = zmq.Context()
 
 #  Socket to talk to server
@@ -16,9 +16,11 @@ socket.connect("tcp://localhost:5555")
 #  Do 10 requests, waiting each time for a response
 for request in range(10):
     print(f"Sending request {request}")
-    socket.send(b"Hello")
+    list=["1","2","3"]
+    socket.send_string(json.dumps(list))
 
     #  Get the reply.
 
     message = socket.recv()
-    print(f"Received reply {request} [ {message} ]")
+    m=message.decode()
+    print(f"Received reply {request} [ {m} ]")
